@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesto</title>
+    <link rel="stylesheet" href="./pages/index.css">
+</head>
+<body class="page">
+  <header class="header">
+    <div class="header__logo"></div>
+    <hr class="header__line">
+  </header>
+  <main class="content">
+    <section class="profile">
+      <div class="profile__profile-container">
+        <img src="./images/avatar.jpg" alt="kusto" class="profile__avatar">
+        <div class="profile__profile-info">
+          <div class="profile__profile-info-container">
+            <h1 class="profile__title">Жак-Ив Кусто</h1>
+            <div class="profile__edit-button">
+              <div class="profile__vector-pen"></div>
+            </div>
+          </div>
+          <p class="profile__subtitle">Исследователь океана</p>
+        </div>
+      </div>
+      <div class="profile__add-button">
+        <div class="profile__vector-plus"></div>
+      </div>
+    </section>
+    <section class="elements">
+      <div class="element">
+        <img src="./images/karachaevsk.jpg" alt="karachaevsk" class="element__mask-group">
+        <div class="element__container">
+          <h2 class="element__title">Карачаевск</h2>
+          <div class="element__group"></div>
+        </div>
+      </div>
+      <div class="element">
+        <img src="./images/elbrus.jpg" alt="elbrus" class="element__mask-group">
+        <div class="element__container">
+          <h2 class="element__title">Гора Эльбрус</h2>
+          <div class="element__group"></div>
+        </div>
+      </div>
+      <div class="element">
+        <img src="./images/dombai.jpg" alt="dombai" class="element__mask-group">
+        <div class="element__container">
+          <h2 class="element__title">Домбай</h2>
+          <div class="element__group"></div>
+        </div>
+      </div>
+      <!-- need to change location and foto -->
+      <div class="element">
+        <img src="./images/karachaevsk.jpg" alt="karachaevsk" class="element__mask-group">
+        <div class="element__container">
+          <h2 class="element__title">Карачаево-Черкесск</h2>
+          <div class="element__group"></div>
+        </div>
+      </div>
+      <div class="element">
+        <img src="./images/elbrus.jpg" alt="elbrus" class="element__mask-group">
+        <div class="element__container">
+          <h2 class="element__title">Гора Эльбрус</h2>
+          <div class="element__group"></div>
+        </div>
+      </div>
+      <div class="element">
+        <img src="./images/dombai.jpg" alt="dombai" class="element__mask-group">
+        <div class="element__container">
+          <h2 class="element__title">Домбай</h2>
+          <div class="element__group"></div>
+        </div>
+      </div>
+      <!-- need to change location and foto -->
+    </section>
+  </main>
+
+  <!-- popup -->
+  <div class="popup">
+    <div class="popup__container popup__container_popup_opened"></div>
+    <div class="popup__form"></div>
+    <h3 class="popup__title">Редактировать профиль</h3>
+    <div class="popup__field-one">Жак-Ив Кусто</div>
+    <div class="popup__line-one"></div>
+    <div class="popup__field-two">Исследователь океана</div>
+    <div class="popup__line-two"></div>
+    <button class="popup__submit-button">
+      <div class="popup__submit-title">Сохранить</div>
+    </button>
+    <div class="popup__close-icon"></div>
+  </div>
+  <!-- popup -->
+
+  <footer class="footer">
+    <p class="footer__copyright">© 2022 Mesto Russia</p>
+  </footer>
+</body>
+</html>
