@@ -10,4 +10,4 @@
 - в проекте выполнена интерактивность за счет использования JavaScript
 
 ### Ссылка на проект:
-https://timurisrafilov.github.io///////////
+https://timurisrafilov.github.io/mesto/
