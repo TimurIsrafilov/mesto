@@ -1,35 +1,51 @@
 .popup {
   position: fixed;
-  justify-self: center;
-  align-self: center;
-  margin: auto;
-  width: 430px;
-  height: 330px;
-  background: #FFFFFF;
-  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
-  border-radius: 10px;
-  margin: 150px auto auto auto;
+  justify-content: center;
+  align-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: none;
 }
 
-@media screen and (max-width: 598px) {
-  .popup {
-    width: 282px;
-    height: 322px;
-    margin: 95px auto auto auto;
-  }
+.popup_opened {
+  display: flex;
 }
 
 .popup__container {
 
 }
 
-.popup__container_popup_opened {
-
-}
-
 .popup__form {
-
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 430px;
+  height: 330px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  margin: 194px auto auto auto;
+  /* display: none; */
 }
+
+@media screen and (max-width: 598px) {
+  .popup__form {
+    width: 282px;
+    height: 322px;
+    margin: 124px auto auto auto;
+  }
+}
+
+
+
+/* .popup__container_popup_opened {
+  display на block или flex
+} */
+
+
 
 .popup__title {
   font-family: 'Inter';
@@ -48,72 +64,62 @@
   }
 }
 
-.popup__field-one {
+.popup__input_name {
   width: 358px;
-  height: 14px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 30px;
+  color: rgba(0, 0, 0);
+  margin: 41px 0 0 34px;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.popup__input_name::placeholder {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: rgba(0, 0, 0);
+}
+
+
+@media screen and (max-width: 598px) {
+  .popup__input_name {
+    width: 238px;
+    margin: 68px 0 0 20px;
+  }
+}
+
+.popup__input_profession {
+  width: 358px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 30px;
+  margin: 25px 0 0 34px;
+  color: rgba(0, 0, 0);
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.popup__input_profession::placeholder {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
   color: #000000;
-  margin: 48px 0 0 36px;
 }
 
 @media screen and (max-width: 598px) {
-  .popup__field-one {
+  .popup__input_profession {
     width: 238px;
-    margin: 75px 0 0 22px;
-  }
-}
-
-.popup__line-one {
-  width: 358px;
-  height: 0px;
-  opacity: 0.2;
-  border: 1px solid #000000;
-  margin: 10px 0 0 36px;
-}
-
-@media screen and (max-width: 598px) {
-  .popup__line-one {
-    width: 238px;
-    margin: 10px 0 0 22px;
-  }
-}
-
-.popup__field-two {
-  width: 358px;
-  height: 14px;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
-  color: #000000;
-  margin: 31px 0 0 36px;
-}
-
-@media screen and (max-width: 598px) {
-  .popup__field-two {
-    width: 238px;
-    margin: 31px 0 0 22px;
-  }
-}
-
-
-.popup__line-two {
-  width: 358px;
-  height: 0px;
-  opacity: 0.2;
-  border: 1px solid #000000;
-  margin: 10px 0 0 36px;
-}
-
-@media screen and (max-width: 598px) {
-  .popup__line-two {
-    width: 238px;
-    margin: 10px 0 0 22px;
+    margin: 23px 0 0 20px;
   }
 }
 
@@ -122,20 +128,24 @@
   height: 50px;
   background: #000000;
   border-radius: 2px;
-  margin: 50px 36px 0 36px;
+  margin: 48px 36px 0 36px;
   padding: 0;
   border: none;
-  font: inherit;
-  color: inherit;
-
   cursor: pointer;
+  opacity: 1;
+  transition: 0.5s;
+}
+
+.popup__submit-button:hover {
+  opacity: 0.6;
+  transition: 0.5s;
 }
 
 @media screen and (max-width: 598px) {
   .popup__submit-button {
     width: 238px;
     height: 46px;
-    margin: 45px 22px 0 22px;
+    margin: 46px 22px 0 22px;
   }
 }
 
@@ -164,8 +174,19 @@
   width: 32px;
   height: 32px;
   position: relative;
-  top: -336px;
+  top: -369px;
   right: -438px;
+  opacity: 1;
+  transition: 0.5s;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.popup__close-icon:hover {
+  opacity: 0.6;
+  transition: 0.5s;
 }
 
 @media screen and (max-width: 598px) {
@@ -173,7 +194,7 @@
     width: 20px;
     height: 20px;
     position: relative;
-    top: -332px;
+    top: -360px;
     right: -262px;
   }
 }

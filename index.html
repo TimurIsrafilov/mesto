@@ -19,37 +19,37 @@
         <div class="profile__profile-info">
           <div class="profile__profile-info-container">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
-            <div class="profile__edit-button">
+            <button class="profile__edit-button">
               <div class="profile__vector-pen"></div>
-            </div>
+            </button>
           </div>
           <p class="profile__subtitle">Исследователь океана</p>
         </div>
       </div>
-      <div class="profile__add-button">
+      <button class="profile__add-button">
         <div class="profile__vector-plus"></div>
-      </div>
+      </button>
     </section>
     <section class="elements">
       <div class="element">
         <img src="./images/karachaevsk.jpg" alt="karachaevsk" class="element__mask-group">
         <div class="element__container">
           <h2 class="element__title">Карачаевск</h2>
-          <div class="element__group"></div>
+          <button class="element__group"></button>
         </div>
       </div>
       <div class="element">
         <img src="./images/elbrus.jpg" alt="elbrus" class="element__mask-group">
         <div class="element__container">
           <h2 class="element__title">Гора Эльбрус</h2>
-          <div class="element__group"></div>
+          <button class="element__group"></button>
         </div>
       </div>
       <div class="element">
         <img src="./images/dombai.jpg" alt="dombai" class="element__mask-group">
         <div class="element__container">
           <h2 class="element__title">Домбай</h2>
-          <div class="element__group"></div>
+          <button class="element__group"></button>
         </div>
       </div>
       <!-- need to change location and foto -->
@@ -57,21 +57,21 @@
         <img src="./images/karachaevsk.jpg" alt="karachaevsk" class="element__mask-group">
         <div class="element__container">
           <h2 class="element__title">Карачаево-Черкесск</h2>
-          <div class="element__group"></div>
+          <button class="element__group"></button>
         </div>
       </div>
       <div class="element">
         <img src="./images/elbrus.jpg" alt="elbrus" class="element__mask-group">
         <div class="element__container">
           <h2 class="element__title">Гора Эльбрус</h2>
-          <div class="element__group"></div>
+          <button class="element__group"></button>
         </div>
       </div>
       <div class="element">
         <img src="./images/dombai.jpg" alt="dombai" class="element__mask-group">
         <div class="element__container">
           <h2 class="element__title">Домбай</h2>
-          <div class="element__group"></div>
+          <button class="element__group"></button>
         </div>
       </div>
       <!-- need to change location and foto -->
@@ -80,22 +80,24 @@
 
   <!-- popup -->
   <div class="popup">
-    <div class="popup__container popup__container_popup_opened"></div>
-    <div class="popup__form"></div>
-    <h3 class="popup__title">Редактировать профиль</h3>
-    <div class="popup__field-one">Жак-Ив Кусто</div>
-    <div class="popup__line-one"></div>
-    <div class="popup__field-two">Исследователь океана</div>
-    <div class="popup__line-two"></div>
-    <button class="popup__submit-button">
-      <div class="popup__submit-title">Сохранить</div>
-    </button>
-    <div class="popup__close-icon"></div>
+    <div class="popup__container">
+      <form class="popup__form">
+        <h3 class="popup__title">Редактировать профиль</h3>
+        <input type="text" value="Жак-Ив Кусто" placeholder="Имя" name="name" class="popup__input popup__input_name"></input>
+        <input type="text" value="Исследователь океана" placeholder="Профессия" name="profession"
+          class="popup__input popup__input_profession"></input>
+        <button type="submit" class="popup__submit-button">
+          <div class="popup__submit-title">Сохранить</div>
+        </button>
+      </form>
+      <button type="button" class="popup__close-icon"></button>
+    </div>
   </div>
   <!-- popup -->
 
   <footer class="footer">
     <p class="footer__copyright">© 2022 Mesto Russia</p>
   </footer>
+  <script src="./scripts/index.js"></script>
 </body>
 </html>
