@@ -1,0 +1,22 @@
+.elements__group {
+  background-image: url(../../../images/like.png);
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 22px;
+  height: 19px;
+  margin: 5px 0 0 0;
+  padding: 0;
+  opacity: 1;
+  transition: 0.5s;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+.elements__group:hover {
+  opacity: 0.5;
+  transition: 0.5s;
+}
+
+.elements__group:active {}

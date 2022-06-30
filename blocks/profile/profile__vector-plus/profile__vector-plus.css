@@ -1,0 +1,15 @@
+.profile__vector-plus {
+  background-image: url(../../../images/plus.png);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 22px;
+  height: 22px;
+}
+
+@media screen and (max-width: 598px) {
+  .profile__vector-plus {
+    width: 16px;
+    height: 16px;
+  }
+}
