@@ -9,6 +9,13 @@
   cursor: pointer;
   opacity: 1;
   transition: 0.5s;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: rgba(255, 255, 255, 1);
 }
 
 .popup__submit-button:hover {
@@ -21,5 +28,7 @@
     width: 238px;
     height: 46px;
     margin: 46px 22px 0 22px;
+    font-size: 14px;
+    line-height: 17px;
   }
 }
