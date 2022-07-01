@@ -13,10 +13,9 @@
   cursor: pointer;
   background: transparent;
   background-image: url(../../../images/pen.png);
-  background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  background-size: 10px
+  background-size: 10px;
 }
 
 .profile__edit-button:hover {
@@ -29,6 +28,6 @@
     width: 18px;
     height: 18px;
     margin: 34px 0 0 0;
-    background-size: 8px
+    background-size: 8px;
   }
 }
