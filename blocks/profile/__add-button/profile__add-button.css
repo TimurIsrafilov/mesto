@@ -6,12 +6,13 @@
   height: 50px;
   margin: 35px 0 0 0;
   border: 2px solid rgba(255, 255, 255, 1);
+  border-radius: 2px;
   box-sizing: border-box;
   opacity: 1;
   transition: 0.5s;
   cursor: pointer;
   background: transparent;
-  background-image: url(../../../images/plus.png);
+  background-image: url(../../../images/plus.svg);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: 22px;
