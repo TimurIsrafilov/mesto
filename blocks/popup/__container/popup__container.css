@@ -3,11 +3,3 @@
   margin: 0;
   align-self: center;
 }
-
-@media screen and (max-width: 598px) {
-  .popup__form {
-    width: 282px;
-    min-height: 322px;
-  }
-}
-

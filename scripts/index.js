@@ -8,9 +8,9 @@ const profileName = document.querySelector('.profile__title');
 const profileProfession = document.querySelector('.profile__subtitle');
 
 function popupOpen() {
-  popupElement.classList.add('popup_opened');
   nameInput.value = profileName.textContent;
   professionInput.value = profileProfession.textContent;
+  popupElement.classList.add('popup_opened');
 }
 
 function popupClose() {
