@@ -19,4 +19,6 @@
   transition: 0.5s;
 }
 
-.elements__group:active {}
+.elements__group_active {
+  background-image: url(../../../images/like-active.svg);
+}
