@@ -34,57 +34,55 @@ const cardList = document.querySelector('.elements');
 const cardElement = document.querySelector('.elements__element');
 const cardTemplate = document.querySelector('.card-template').content;
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 initialCards.forEach(function (element) {
   const cardElement = cardTemplate.cloneNode(true);
+  const cardPhoto = cardElement.querySelector(".elements__mask-group");
+  const cardTitle = cardElement.querySelector(".elements__title");
+  const likeButton = cardElement.querySelector(".elements__group");
+  const trashButton = cardElement.querySelector(".elements__trash-icon");
 
-  cardElement.querySelector('.elements__title').textContent = element.name;
-  cardElement.querySelector('.elements__mask-group').src = element.link;
-  cardElement.querySelector('.elements__mask-group').alt = element.name;
+  cardPhoto.src = element.link;
+  cardPhoto.alt = element.name;
+  cardTitle.textContent = element.name;
 
-  cardList.append(cardElement);
-})
+  // активация-деактивация лайка
+  likeButton.addEventListener('click', function(evt) {
+    evt.target.classList.toggle('elements__group_active')
+  });
 
-// кнопка удалить
-const trashButton = document.querySelector('.elements__trash-icon');
-
-function cardRemoval() {
-  const cardElement = trashButton.closest('.elements__element');
-  cardElement.remove();
+  // кнопка удалить
+  function cardRemoval() {
+    const cardElement = trashButton.closest('.elements__element');
+    cardElement.remove();
 }
 
-trashButton.addEventListener('click', cardRemoval);
+  trashButton.addEventListener('click', cardRemoval);
 
-// активация-деактивация лайка
-document.querySelector('.elements__group').addEventListener('click', function (evt) {
-  evt.target.classList.toggle('elements__group_active');
+  const popupPhoto = document.querySelector('.popup_photo');
+  const popupPhotoOpenButton = document.querySelector('.elements__mask-group');
+  const popupPhotoCloseButton = popupPhoto.querySelector('.popup__close-icon');
+
+  // увеличение фото
+  function popupPhotoOpen() {
+    popupPhoto.classList.add('popup_opened');
+
+    cardPhoto.src = element.link;
+    cardPhoto.alt = element.name;
+    cardTitle.textContent = element.name;
+  };
+
+  popupPhotoOpenButton.addEventListener('click', popupPhotoOpen);
+
+  // закрыть увеличение фото
+  function popupPhotoClose() {
+    popupPhoto.classList.remove('popup_opened')
+  };
+
+  popupPhotoCloseButton.addEventListener('click', popupPhotoClose);
+
+  cardList.append(cardElement);
 });
+
 
 // активация формы попап для внесения карточек
 const popupCard = document.querySelector('.popup_card');
@@ -114,19 +112,3 @@ function formCardSubmitHandler (evt) {
 popupCardOpenButton.addEventListener('click', popupOpen);
 popupCardCloseButton.addEventListener('click', popupClose);
 formCard.addEventListener('submit', formCardSubmitHandler);
-
-// активация формы попап увеличения фото
-const popupPhoto = document.querySelector('.popup_photo');
-const popupPhotoOpenButton = document.querySelector('.elements__mask-group');
-const popupPhotoCloseButton = popupPhoto.querySelector('.popup__close-icon');
-
-popupPhotoOpenButton.addEventListener('click', function(element) {
-  popupPhoto.classList.add('popup_opened');
-  popupPhotoOpenButton.textContent = element.alt;
-  popupPhotoOpenButton.src = element.src;
-  popupPhotoOpenButton.alt = element.alt;
-});
-
-popupPhotoCloseButton.addEventListener('click', function() {
-  popupPhoto.classList.remove('popup_opened');
-});
