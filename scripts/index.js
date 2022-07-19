@@ -66,9 +66,9 @@ function createCard(cardName) {
 
   function popupPhotoOpen() {
     popupPhoto.classList.add('popup_opened');
-    cardPhoto.classList.add('elements__mask-group_size_enlarge');
+    cardPhoto.classList.add('elements__mask-group_size_large');
     cardPhoto.classList.remove('elements__mask-group');
-    namePhoto.classList.add('elements__title_size_enlarge');
+    namePhoto.classList.add('elements__title_size_large');
   };
 
   function popupPhotoClose() {
