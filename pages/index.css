@@ -16,9 +16,12 @@
 @import url("../blocks/elements/elements.css");
 @import url("../blocks/elements/__element/elements__element.css");
 @import url("../blocks/elements/__mask-group/elements__mask-group.css");
+@import url("../blocks/elements/__mask-group/_size_enlarge/elements__mask-group_size_enlarge.css");
 @import url("../blocks/elements/__container/elements__container.css");
 @import url("../blocks/elements/__title/elements__title.css");
+@import url("../blocks/elements/__title/_size_enlarge/elements__title_size_enlarge.css");
 @import url("../blocks/elements/__group/elements__group.css");
+@import url("../blocks/elements/__group/_active/elements__group_active.css");
 @import url("../blocks/elements/__trash-icon/elements__trash-icon.css");
 @import url("../blocks/footer/footer.css");
 @import url("../blocks/footer/__copyright/footer__copyright.css");
