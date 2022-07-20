@@ -37,8 +37,8 @@ const cardlist = document.querySelector('.elements');
 const template = document.querySelector('.card-template');
 const cardName = cardlist.querySelector('.elements__title');
 const popupPhoto = document.querySelector('.popup_photo');
-const cardPhoto = popupPhoto.querySelector('.elements__mask-group');
-const namePhoto = popupPhoto.querySelector('.elements__title');
+const cardPhoto = popupPhoto.querySelector('.popup__mask-group');
+const namePhoto = popupPhoto.querySelector('.popup__phototitle');
 const popupPhotoCloseButton = popupPhoto.querySelector('.popup__close-icon');
 
 //cоздаем разметку карточек в HTML
@@ -66,9 +66,6 @@ function createCard(cardName) {
 
   function popupPhotoOpen() {
     popupPhoto.classList.add('popup_opened');
-    cardPhoto.classList.add('elements__mask-group_size_large');
-    cardPhoto.classList.remove('elements__mask-group');
-    namePhoto.classList.add('elements__title_size_large');
   };
 
   function popupPhotoClose() {
