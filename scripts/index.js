@@ -1,6 +1,6 @@
 const popupProfile = document.querySelector(".popup_profile");
 const popupProfileOpenButton = document.querySelector(".profile__edit-button");
-const popupProfileCloseButton = popupProfile.querySelector(".popup__close-icon");
+const popupProfileCloseButton =  popupProfile.querySelector(".popup__close-icon");
 const nameInput = popupProfile.querySelector(".popup__input_type_name");
 const professionInput = popupProfile.querySelector(".popup__input_type_profession");
 const formProfile = popupProfile.querySelector(".popup__form");
@@ -8,7 +8,6 @@ const profileName = document.querySelector(".profile__title");
 const profileProfession = document.querySelector(".profile__subtitle");
 const cardList = document.querySelector(".elements");
 const template = document.querySelector(".card-template");
-const cardData = cardList.querySelector(".elements__title");
 const popupPhoto = document.querySelector(".popup_photo");
 const cardPhoto = popupPhoto.querySelector(".popup__mask-group");
 const namePhoto = popupPhoto.querySelector(".popup__phototitle");
@@ -19,6 +18,7 @@ const popupCardCloseButton = popupCard.querySelector(".popup__close-icon");
 const placeInput = popupCard.querySelector(".popup__input_type_place");
 const referenceInput = popupCard.querySelector(".popup__input_type_reference");
 const formCard = popupCard.querySelector(".popup__form");
+const templateContent = template.content.querySelector(".elements__element");
 
 //общий попап на открытие
 function openPopup(popup) {
@@ -52,11 +52,14 @@ function closePopupCard() {
   closePopup(popupCard);
 }
 
+//попап на закрытие фото
+function closePopupPhoto() {
+  closePopup(popupPhoto);
+}
+
 //cоздаем разметку карточек в HTML
 function createCard(cardData) {
-  const templateCard = template.content
-    .querySelector(".elements__element")
-    .cloneNode(true);
+  const templateCard = templateContent.cloneNode(true);
   const templatePhoto = templateCard.querySelector(".elements__mask-group");
   const templateTitle = templateCard.querySelector(".elements__title");
 
@@ -91,14 +94,6 @@ function createCard(cardData) {
     openPopup(popupPhoto);
   }
 
-  //попап на закрытие фото
-  function closePopupPhoto() {
-    closePopup(popupPhoto);
-  }
-
-  //слушатель попапа на закрытие фото
-  popupPhotoCloseButton.addEventListener("click", closePopupPhoto);
-
   //добавляем шаблонную карту в лист
   return templateCard;
 }
@@ -121,12 +116,11 @@ function handleSubmitProfileForm(evt) {
 function handleSubmitCardForm(evt) {
   evt.preventDefault();
 
-  const newCards = [{ name: placeInput.value, link: referenceInput.value }];
-
-  newCards.forEach((cardData) => {
-    const templateCard = createCard(cardData);
-    cardList.prepend(templateCard);
+  const templateCard = createCard({
+    name: placeInput.value,
+    link: referenceInput.value,
   });
+  cardList.prepend(templateCard);
 
   placeInput.value = "";
   referenceInput.value = "";
@@ -139,5 +133,6 @@ popupCardOpenButton.addEventListener("click", openPopupCard);
 popupCardCloseButton.addEventListener("click", closePopupCard);
 popupProfileOpenButton.addEventListener("click", openProfilePopup);
 popupProfileCloseButton.addEventListener("click", closeProfilePopup);
+popupPhotoCloseButton.addEventListener("click", closePopupPhoto);
 formCard.addEventListener("submit", handleSubmitCardForm);
 formProfile.addEventListener("submit", handleSubmitProfileForm);
