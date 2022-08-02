@@ -38,10 +38,12 @@
       <form class="popup__form" name="profileEditForm">
         <h3 class="popup__title">Редактировать профиль</h3>
         <input type="text" value="Жак-Ив Кусто" placeholder="Имя" name="name" required
-          class="popup__input popup__input_type_name">
+          class="popup__input popup__input_type_name" minlength="2" maxlength="40">
+        <span class="popup__input-error"></span>
         <input type="text" value="Исследователь океана" placeholder="Профессия" name="profession" required
-          class="popup__input popup__input_type_profession">
-        <button type="submit" class="popup__submit-button" aria-label="сохранить форму">Сохранить</button>
+          class="popup__input popup__input_type_profession" minlength="2" maxlength="200">
+        <span value="" class="popup__input-error"></span>
+        <button type="submit" class="popup__submit-button" aria-label="сохранить форму" disabled>Сохранить</button>
       </form>
       <button type="button" class="popup__close-icon" aria-label="закрыть форму"></button>
     </div>
@@ -50,18 +52,20 @@
     <div class="popup__container">
       <form class="popup__form" name="cardEditForm">
         <h3 class="popup__title">Новое место</h3>
-        <input type="text" value placeholder="Название" name="place" required
-          class="popup__input popup__input_type_place">
-        <input type="url" value placeholder="Ссылка на картинку" name="reference" required
+        <input type="text" placeholder="Название" name="place" required class="popup__input popup__input_type_place"
+          minlength="2" maxlength="30">
+        <span class="popup__input-error"></span>
+        <input type="url" placeholder="Ссылка на картинку" name="reference" required
           class="popup__input popup__input_type_reference">
-        <button type="submit" class="popup__submit-button" aria-label="сохранить форму">Сохранить</button>
+        <span class="popup__input-error"></span>
+        <button type="submit" class="popup__submit-button" aria-label="сохранить форму" disabled>Сохранить</button>
       </form>
       <button type="button" class="popup__close-icon" aria-label="закрыть форму"></button>
     </div>
   </div>
   <div class="popup popup_photo">
     <div class="popup__container">
-      <img src="src" alt="alt" class="popup__mask-group">
+      <img src="#" alt="#" class="popup__mask-group">
       <h2 class="popup__phototitle"></h2>
       <button type="button" class="popup__close-icon" aria-label="закрыть форму"></button>
     </div>
@@ -78,6 +82,7 @@
   </template>
   <script src="./scripts/cards.js"></script>
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validate.js"></script>
 </body>
 
 </html>

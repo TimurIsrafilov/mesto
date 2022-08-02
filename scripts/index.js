@@ -1,33 +1,83 @@
-const popupProfile = document.querySelector(".popup_profile");
-const popupProfileOpenButton = document.querySelector(".profile__edit-button");
-const popupProfileCloseButton =  popupProfile.querySelector(".popup__close-icon");
-const nameInput = popupProfile.querySelector(".popup__input_type_name");
-const professionInput = popupProfile.querySelector(".popup__input_type_profession");
-const formProfile = popupProfile.querySelector(".popup__form");
-const profileName = document.querySelector(".profile__title");
-const profileProfession = document.querySelector(".profile__subtitle");
-const cardList = document.querySelector(".elements");
-const template = document.querySelector(".card-template");
-const popupPhoto = document.querySelector(".popup_photo");
-const cardPhoto = popupPhoto.querySelector(".popup__mask-group");
-const namePhoto = popupPhoto.querySelector(".popup__phototitle");
-const popupPhotoCloseButton = popupPhoto.querySelector(".popup__close-icon");
-const popupCard = document.querySelector(".popup_card");
-const popupCardOpenButton = document.querySelector(".profile__add-button");
-const popupCardCloseButton = popupCard.querySelector(".popup__close-icon");
-const placeInput = popupCard.querySelector(".popup__input_type_place");
-const referenceInput = popupCard.querySelector(".popup__input_type_reference");
-const formCard = popupCard.querySelector(".popup__form");
-const templateContent = template.content.querySelector(".elements__element");
-
-//общий попап на открытие
-function openPopup(popup) {
-  popup.classList.add("popup_opened");
+const selectors = {
+  popupProfile: ".popup_profile",
+  profileEditButton: ".profile__edit-button",
+  popupCloseIcon: ".popup__close-icon",
+  popupInputTypeName: ".popup__input_type_name",
+  popupInputTypeProfession: ".popup__input_type_profession",
+  popupForm: ".popup__form",
+  profileTitle: ".profile__title",
+  profileSubtitle: ".profile__subtitle",
+  elements: ".elements",
+  cardTemplate: ".card-template",
+  popupPhoto: ".popup_photo",
+  popupMask_group: ".popup__mask-group",
+  popupPhotoTitle: ".popup__phototitle",
+  popupCard: ".popup_card",
+  profileAddButton: ".profile__add-button",
+  popupInputTypePlace: ".popup__input_type_place",
+  popupInputTypeReference: ".popup__input_type_reference",
+  elementsElement: ".elements__element",
+  popupOpened: "popup_opened",
+  popupOpenedSelector: ".popup_opened",
+  elementsMask_group: ".elements__mask-group",
+  elementsTitle: ".elements__title",
+  elementsGroup: ".elements__group",
+  elementsGroupActive: "elements__group_active",
+  elementsTrashIcon: ".elements__trash-icon",
 }
 
-//общий попап на закрытие
+const popupProfile = document.querySelector(selectors.popupProfile);
+const popupProfileOpenButton = document.querySelector(selectors.profileEditButton);
+const popupProfileCloseButton =  popupProfile.querySelector(selectors.popupCloseIcon);
+const nameInput = popupProfile.querySelector(selectors.popupInputTypeName);
+const professionInput = popupProfile.querySelector(selectors.popupInputTypeProfession);
+const formProfile = popupProfile.querySelector(selectors.popupForm);
+const profileName = document.querySelector(selectors.profileTitle);
+const profileProfession = document.querySelector(selectors.profileSubtitle);
+const cardList = document.querySelector(selectors.elements);
+const template = document.querySelector(selectors.cardTemplate);
+const popupPhoto = document.querySelector(selectors.popupPhoto);
+const cardPhoto = popupPhoto.querySelector(selectors.popupMask_group);
+const namePhoto = popupPhoto.querySelector(selectors.popupPhotoTitle);
+const popupPhotoCloseButton = popupPhoto.querySelector(selectors.popupCloseIcon);
+const popupCard = document.querySelector(selectors.popupCard);
+const popupCardOpenButton = document.querySelector(selectors.profileAddButton);
+const popupCardCloseButton = popupCard.querySelector(selectors.popupCloseIcon);
+const placeInput = popupCard.querySelector(selectors.popupInputTypePlace);
+const referenceInput = popupCard.querySelector(selectors.popupInputTypeReference);
+const formCard = popupCard.querySelector(selectors.popupForm);
+const templateContent = template.content.querySelector(selectors.elementsElement);
+
+//общий попап на открытие + добавления слушателей если попап открыт
+function openPopup(popup) {
+  popup.classList.add(selectors.popupOpened);
+  document.addEventListener('keydown', closePopupByEsc);
+  popup.addEventListener('click', closePopupByOverlay);
+}
+
+//общий попап на закрытие + удаления слушателей если попап закрыт
 function closePopup(popup) {
-  popup.classList.remove("popup_opened");
+  popup.classList.remove(selectors.popupOpened);
+  document.removeEventListener('keydown', closePopupByEsc);
+  popup.removeEventListener('click', closePopupByOverlay);
+}
+
+//закрытия попапа при нажатии на оверлей
+function closePopupByOverlay(evt) {
+  const popup = document.querySelector(selectors.popupOpenedSelector);
+  if (evt.target !== evt.currentTarget) {
+    return
+  }
+    closePopup(popup);
+}
+
+//закрытия попапа при нажатии на escape
+function closePopupByEsc(evt) {
+  const popup = document.querySelector(selectors.popupOpenedSelector);
+  if (evt.key !== 'Escape') {
+    return
+  }
+    closePopup(popup);
 }
 
 //попап на открытие профиля
@@ -60,23 +110,23 @@ function closePopupPhoto() {
 //cоздаем разметку карточек в HTML
 function createCard(cardData) {
   const templateCard = templateContent.cloneNode(true);
-  const templatePhoto = templateCard.querySelector(".elements__mask-group");
-  const templateTitle = templateCard.querySelector(".elements__title");
+  const templatePhoto = templateCard.querySelector(selectors.elementsMask_group);
+  const templateTitle = templateCard.querySelector(selectors.elementsTitle);
 
   templatePhoto.src = cardData.link;
   templatePhoto.alt = cardData.name;
   templateTitle.textContent = cardData.name;
 
   //активация-деактивация лайка
-  const likeButton = templateCard.querySelector(".elements__group");
+  const likeButton = templateCard.querySelector(selectors.elementsGroup);
 
   likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("elements__group_active");
+    likeButton.classList.toggle(selectors.elementsGroupActive);
   });
 
   //удаление карточки
   templateCard
-    .querySelector(".elements__trash-icon")
+    .querySelector(selectors.elementsTrashIcon)
     .addEventListener("click", () => {
       templateCard.remove();
     });

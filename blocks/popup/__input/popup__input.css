@@ -15,7 +15,7 @@
 }
 
 .popup__input_type_profession {
-  margin: 25px 0 0 34px;
+  margin: 11px 0 0 34px;
 }
 
 .popup__input_type_place {
@@ -23,7 +23,7 @@
 }
 
 .popup__input_type_reference {
-  margin: 25px 0 0 34px;
+  margin: 11px 0 0 34px;
 }
 
 @media screen and (max-width: 598px) {
@@ -40,7 +40,7 @@
 
 @media screen and (max-width: 598px) {
   .popup__input_type_profession {
-    margin: 23px 0 0 20px;
+    margin: 9px 0 0 20px;
   }
 }
 
@@ -52,6 +52,6 @@
 
 @media screen and (max-width: 598px) {
   .popup__input_type_reference {
-    margin: 23px 0 0 20px;
+    margin: 9px 0 0 20px;
   }
 }
