@@ -35,7 +35,7 @@ const formProfile = popupProfile.querySelector(selectors.popupForm);
 const profileName = document.querySelector(selectors.profileTitle);
 const profileProfession = document.querySelector(selectors.profileSubtitle);
 const cardList = document.querySelector(selectors.elements);
-const template = document.querySelector(selectors.cardTemplate);
+const cardTemplate = document.querySelector(selectors.cardTemplate);
 const popupPhoto = document.querySelector(selectors.popupPhoto);
 const cardPhoto = popupPhoto.querySelector(selectors.popupMask_group);
 const namePhoto = popupPhoto.querySelector(selectors.popupPhotoTitle);
@@ -46,7 +46,7 @@ const popupCardCloseButton = popupCard.querySelector(selectors.popupCloseIcon);
 const placeInput = popupCard.querySelector(selectors.popupInputTypePlace);
 const referenceInput = popupCard.querySelector(selectors.popupInputTypeReference);
 const formCard = popupCard.querySelector(selectors.popupForm);
-const templateContent = template.content.querySelector(selectors.elementsElement);
+const templateContent = cardTemplate.content.querySelector(selectors.elementsElement);
 
 //общий попап на открытие + добавления слушателей если попап открыт
 function openPopup(popup) {
@@ -65,9 +65,7 @@ function closePopup(popup) {
 //закрытия попапа при нажатии на оверлей
 function closePopupByOverlay(evt) {
   const popup = document.querySelector(selectors.popupOpenedSelector);
-  if (evt.target !== evt.currentTarget) {
-    return
-  }
+  if (evt.target !== evt.currentTarget) return;
     closePopup(popup);
 }
 
@@ -109,35 +107,37 @@ function closePopupPhoto() {
 
 //cоздаем разметку карточек в HTML
 function createCard(cardData) {
-  const templateCard = templateContent.cloneNode(true);
-  const templatePhoto = templateCard.querySelector(selectors.elementsMask_group);
-  const templateTitle = templateCard.querySelector(selectors.elementsTitle);
+  const card = templateContent.cloneNode(true);
+  const templatePhoto = card.querySelector(selectors.elementsMask_group);
+  const templateTitle = card.querySelector(selectors.elementsTitle);
 
   templatePhoto.src = cardData.link;
   templatePhoto.alt = cardData.name;
   templateTitle.textContent = cardData.name;
 
   //активация-деактивация лайка
-  const likeButton = templateCard.querySelector(selectors.elementsGroup);
+  const likeButton = card.querySelector(selectors.elementsGroup);
 
   likeButton.addEventListener("click", () => {
     likeButton.classList.toggle(selectors.elementsGroupActive);
   });
 
   //удаление карточки
-  templateCard
+  card
     .querySelector(selectors.elementsTrashIcon)
     .addEventListener("click", () => {
-      templateCard.remove();
+      card.remove();
     });
 
   //попап увеличения картинки
-  templatePhoto.addEventListener("click", () => {
+  function enlargePhoto() {
     cardPhoto.src = templatePhoto.src;
     cardPhoto.alt = templatePhoto.alt;
     namePhoto.textContent = templateTitle.textContent;
     openPopupPhoto(popupPhoto);
-  });
+  };
+
+  templatePhoto.addEventListener("click", enlargePhoto);
 
   //попап на открытие фото
   function openPopupPhoto() {
@@ -145,13 +145,13 @@ function createCard(cardData) {
   }
 
   //добавляем шаблонную карту в лист
-  return templateCard;
+  return card;
 }
 
 //создаем исходные карты
 initialCards.forEach((cardData) => {
-  const templateCard = createCard(cardData);
-  cardList.append(templateCard);
+  const card = createCard(cardData);
+  cardList.append(card);
 });
 
 //функция правки профиля
@@ -166,11 +166,11 @@ function handleSubmitProfileForm(evt) {
 function handleSubmitCardForm(evt) {
   evt.preventDefault();
 
-  const templateCard = createCard({
+  const card = createCard({
     name: placeInput.value,
     link: referenceInput.value,
   });
-  cardList.prepend(templateCard);
+  cardList.prepend(card);
 
   placeInput.value = "";
   referenceInput.value = "";
