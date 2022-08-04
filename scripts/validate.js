@@ -41,7 +41,7 @@ const toggleButtonState = (inputList, buttonElement, config) => {
 
   if (!hasInvalidInput(inputList)) {
     buttonElement.removeAttribute("disabled");
-    buttonElement.classList.remove('popup__submit-button_state_invalid');
+    buttonElement.classList.remove(config.inactiveButtonClass);
   } else {
     buttonElement.setAttribute("disabled", true);
     buttonElement.classList.add('popup__submit-button_state_invalid');
