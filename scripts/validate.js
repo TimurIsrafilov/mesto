@@ -1,14 +1,22 @@
+const config = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__submit-button",
+  inputErrorClass: "popup__input_state_invalid",
+  inactiveButtonClass: "popup__submit-button_state_invalid",
+};
+
 // показываем ошибку
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add('popup__input_state_invalid');
+  inputElement.classList.add(config.inputErrorClass);
   errorElement.textContent = errorMessage;
 };
 
 // удаляем ошибку
 const hideInputError = (formElement, inputElement) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove('popup__input_state_invalid');
+  inputElement.classList.remove(config.inputErrorClass);
   errorElement.textContent = '';
 };
 
@@ -16,10 +24,10 @@ const hideInputError = (formElement, inputElement) => {
 const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.setAttribute("disabled", true);
-    buttonElement.classList.add('popup__submit-button_state_invalid');
+    buttonElement.classList.add(config.inactiveButtonClass);
   } else {
     buttonElement.removeAttribute("disabled");
-    buttonElement.classList.remove('popup__submit-button_state_invalid');
+    buttonElement.classList.remove(config.inactiveButtonClass);
   }
 };
 
@@ -41,8 +49,8 @@ const hasInvalidInput = (inputList) => {
 
 // установка слушателей
 const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-  const buttonElement = formElement.querySelector('.popup__submit-button');
+  const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
+  const buttonElement = formElement.querySelector(config.submitButtonSelector);
 
   toggleButtonState(inputList, buttonElement);
 
@@ -56,7 +64,7 @@ const setEventListeners = (formElement) => {
 
 // включить валидацию
 const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll('.popup__form'));
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
 
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', (evt) => {
