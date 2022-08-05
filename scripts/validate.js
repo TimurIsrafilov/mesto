@@ -1,11 +1,3 @@
-const obj = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__submit-button",
-  inputErrorClass: "popup__input_state_invalid",
-  inactiveButtonClass: "popup__submit-button_state_invalid",
-};
-
 // показываем ошибку
 const showInputError = (formElement, inputElement, errorMessage, config) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -54,6 +46,7 @@ const setEventListeners = (formElement, config) => {
 
   toggleButtonState(inputList, buttonElement, config);
 
+
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
       isValid(formElement, inputElement, config);
@@ -69,10 +62,17 @@ const enableValidation = (config) => {
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
+      evt.submitter.setAttribute('disabled', true);
+      evt.submitter.classList.add(config.inactiveButtonClass);
     });
-
     setEventListeners(formElement, config);
   });
 };
 
-enableValidation(obj);
+enableValidation({
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__submit-button",
+  inputErrorClass: "popup__input_state_invalid",
+  inactiveButtonClass: "popup__submit-button_state_invalid",
+});

@@ -163,7 +163,7 @@ function handleSubmitProfileForm(evt) {
 }
 
 //функция создания новой карты
-function handleSubmitCardForm(evt, inputList, buttonElement, config) {
+function handleSubmitCardForm(evt) {
   evt.preventDefault();
 
   const card = createCard({
@@ -176,8 +176,6 @@ function handleSubmitCardForm(evt, inputList, buttonElement, config) {
   referenceInput.value = "";
 
   closePopupCard(popupCard);
-
-  toggleButtonState(inputList, buttonElement, config);
 }
 
 
