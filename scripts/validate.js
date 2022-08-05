@@ -38,13 +38,12 @@ const hasInvalidInput = (inputList) => {
 
 // активация-деактивация кнопки сабмит
 const toggleButtonState = (inputList, buttonElement, config) => {
-
-  if (!hasInvalidInput(inputList)) {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.setAttribute("disabled", true);
+    buttonElement.classList.add(config.inactiveButtonClass);
+  } else {
     buttonElement.removeAttribute("disabled");
     buttonElement.classList.remove(config.inactiveButtonClass);
-  } else {
-    buttonElement.setAttribute("disabled", true);
-    buttonElement.classList.add('popup__submit-button_state_invalid');
   }
 };
 
@@ -53,12 +52,12 @@ const setEventListeners = (formElement, config) => {
   const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
   const buttonElement = formElement.querySelector(config.submitButtonSelector);
 
-  toggleButtonState(inputList, buttonElement);
+  toggleButtonState(inputList, buttonElement, config);
 
-  inputList.forEach((inputElement, config) => {
+  inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
       isValid(formElement, inputElement, config);
-      toggleButtonState(inputList, buttonElement);
+      toggleButtonState(inputList, buttonElement, config);
     });
   });
 };
