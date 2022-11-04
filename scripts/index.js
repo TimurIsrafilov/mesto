@@ -26,10 +26,6 @@ import {
   templateContent,
 } from "./constants.js";
 
-// ----------------------------------------------
-
-
-
 const config = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -44,18 +40,8 @@ const formValidatorCard = new FormValidator(config, formCard);
 formValidatorProfile.enableValidation();
 formValidatorCard.enableValidation();
 
-//  ---------------------
-
-
-
-
-
-
-// -----------------------------------------------
-
-export { openPopup };
-
 //общий попап на открытие + добавления слушателей если попап открыт
+export { openPopup };
 function openPopup(popup) {
   popup.classList.add(selectors.popupOpened);
   document.addEventListener('keydown', closePopupByEsc);
@@ -120,7 +106,7 @@ const renderCard = (data) => {
 }
 
 //создание исходных карт
-initialCards.forEach((data, cardList) => {
+initialCards.forEach((data) => {
   renderCard(data);
 });
 
