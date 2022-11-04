@@ -1,52 +1,59 @@
-const selectors = {
-  popupProfile: ".popup_profile",
-  profileEditButton: ".profile__edit-button",
-  popupCloseIcon: ".popup__close-icon",
-  popupInputTypeName: ".popup__input_type_name",
-  popupInputTypeProfession: ".popup__input_type_profession",
-  popupForm: ".popup__form",
-  profileTitle: ".profile__title",
-  profileSubtitle: ".profile__subtitle",
-  elements: ".elements",
-  cardTemplate: ".card-template",
-  popupPhoto: ".popup_photo",
-  popupMask_group: ".popup__mask-group",
-  popupPhotoTitle: ".popup__phototitle",
-  popupCard: ".popup_card",
-  profileAddButton: ".profile__add-button",
-  popupInputTypePlace: ".popup__input_type_place",
-  popupInputTypeReference: ".popup__input_type_reference",
-  elementsElement: ".elements__element",
-  popupOpened: "popup_opened",
-  popupOpenedSelector: ".popup_opened",
-  elementsMask_group: ".elements__mask-group",
-  elementsTitle: ".elements__title",
-  elementsGroup: ".elements__group",
-  elementsGroupActive: "elements__group_active",
-  elementsTrashIcon: ".elements__trash-icon",
+import { FormValidator } from './FormValidator.js';
+import { Card } from './Card.js';
+import { initialCards } from './cards.js';
+
+initialCards
+
+import {
+  selectors,
+  popupProfile,
+  popupProfileOpenButton,
+  popupProfileCloseButton,
+  nameInput,
+  professionInput,
+  formProfile,
+  profileName,
+  profileProfession,
+  cardList,
+  popupPhoto,
+  popupPhotoCloseButton,
+  popupCard,
+  popupCardOpenButton,
+  popupCardCloseButton,
+  placeInput,
+  referenceInput,
+  formCard,
+  templateContent,
+} from "./constants.js";
+
+// ----------------------------------------------
+
+
+
+const config = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit-button',
+  inputErrorClass: 'popup__input_state_invalid',
+  inactiveButtonClass: 'popup__submit-button_state_invalid',
 }
 
-const popupProfile = document.querySelector(selectors.popupProfile);
-const popupProfileOpenButton = document.querySelector(selectors.profileEditButton);
-const popupProfileCloseButton =  popupProfile.querySelector(selectors.popupCloseIcon);
-const nameInput = popupProfile.querySelector(selectors.popupInputTypeName);
-const professionInput = popupProfile.querySelector(selectors.popupInputTypeProfession);
-const formProfile = popupProfile.querySelector(selectors.popupForm);
-const profileName = document.querySelector(selectors.profileTitle);
-const profileProfession = document.querySelector(selectors.profileSubtitle);
-const cardList = document.querySelector(selectors.elements);
-const cardTemplate = document.querySelector(selectors.cardTemplate);
-const popupPhoto = document.querySelector(selectors.popupPhoto);
-const cardPhoto = popupPhoto.querySelector(selectors.popupMask_group);
-const namePhoto = popupPhoto.querySelector(selectors.popupPhotoTitle);
-const popupPhotoCloseButton = popupPhoto.querySelector(selectors.popupCloseIcon);
-const popupCard = document.querySelector(selectors.popupCard);
-const popupCardOpenButton = document.querySelector(selectors.profileAddButton);
-const popupCardCloseButton = popupCard.querySelector(selectors.popupCloseIcon);
-const placeInput = popupCard.querySelector(selectors.popupInputTypePlace);
-const referenceInput = popupCard.querySelector(selectors.popupInputTypeReference);
-const formCard = popupCard.querySelector(selectors.popupForm);
-const templateContent = cardTemplate.content.querySelector(selectors.elementsElement);
+const formValidatorProfile = new FormValidator(config, formProfile);
+const formValidatorCard = new FormValidator(config, formCard);
+
+formValidatorProfile.enableValidation();
+formValidatorCard.enableValidation();
+
+//  ---------------------
+
+
+
+
+
+
+// -----------------------------------------------
+
+export { openPopup };
 
 //общий попап на открытие + добавления слушателей если попап открыт
 function openPopup(popup) {
@@ -105,54 +112,32 @@ function closePopupPhoto() {
   closePopup(popupPhoto);
 }
 
-//cоздаем разметку карточек в HTML
-function createCard(cardData) {
-  const card = templateContent.cloneNode(true);
-  const templatePhoto = card.querySelector(selectors.elementsMask_group);
-  const templateTitle = card.querySelector(selectors.elementsTitle);
-
-  templatePhoto.src = cardData.link;
-  templatePhoto.alt = cardData.name;
-  templateTitle.textContent = cardData.name;
-
-  //активация-деактивация лайка
-  const likeButton = card.querySelector(selectors.elementsGroup);
-
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle(selectors.elementsGroupActive);
-  });
-
-  //удаление карточки
-  card
-    .querySelector(selectors.elementsTrashIcon)
-    .addEventListener("click", () => {
-      card.remove();
-    });
-
-  //попап увеличения картинки
-  function enlargePhoto() {
-    cardPhoto.src = templatePhoto.src;
-    cardPhoto.alt = templatePhoto.alt;
-    namePhoto.textContent = templateTitle.textContent;
-    openPopupPhoto(popupPhoto);
-  };
-
-  templatePhoto.addEventListener("click", enlargePhoto);
-
-  //попап на открытие фото
-  function openPopupPhoto() {
-    openPopup(popupPhoto);
-  }
-
-  //добавляем шаблонную карту в лист
-  return card;
+//создание карт
+const renderCard = (data) => {
+  const card = new Card(data, templateContent);
+  const cardElement = card.createCard();
+  cardList.prepend(cardElement);
 }
 
-//создаем исходные карты
-initialCards.forEach((cardData) => {
-  const card = createCard(cardData);
-  cardList.append(card);
+//создание исходных карт
+initialCards.forEach((data, cardList) => {
+  renderCard(data);
 });
+
+//создание новой карты
+function handleSubmitCardForm(evt) {
+  evt.preventDefault();
+
+  const card = renderCard({
+    name: placeInput.value,
+    link: referenceInput.value,
+  });
+
+  placeInput.value = "";
+  referenceInput.value = "";
+
+  closePopupCard(popupCard);
+}
 
 //функция правки профиля
 function handleSubmitProfileForm(evt) {
@@ -161,23 +146,6 @@ function handleSubmitProfileForm(evt) {
   profileProfession.textContent = professionInput.value;
   closeProfilePopup();
 }
-
-//функция создания новой карты
-function handleSubmitCardForm(evt) {
-  evt.preventDefault();
-
-  const card = createCard({
-    name: placeInput.value,
-    link: referenceInput.value,
-  });
-  cardList.prepend(card);
-
-  placeInput.value = "";
-  referenceInput.value = "";
-
-  closePopupCard(popupCard);
-}
-
 
 //обработчики
 popupCardOpenButton.addEventListener("click", openPopupCard);
