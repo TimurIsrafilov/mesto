@@ -56,7 +56,6 @@ function closePopup(popup) {
 
 //закрытия попапа при нажатии на оверлей
 function closePopupByOverlay(evt) {
-  const popup = document.querySelector(selectors.popupOpenedSelector);
   if (evt.target !== evt.currentTarget) return;
   closePopup(evt.target);
 }

@@ -19,11 +19,11 @@ export const selectors = {
   cardTemplateContent: ".elements__element",
   popupOpened: "popup_opened",
   popupOpenedSelector: ".popup_opened",
-  cardsContainerImage: ".elements__mask-group",
-  cardsContainerTitle: ".elements__title",
-  cardsContainerLike: ".elements__group",
-  cardsContainerLikeActive: "elements__group_active",
-  cardsContainerTrashIcon: ".elements__trash-icon",
+  cardImage: ".elements__mask-group",
+  cardTitle: ".elements__title",
+  cardLike: ".elements__group",
+  cardLikeActive: "elements__group_active",
+  cardTrashIcon: ".elements__trash-icon",
 }
 
 export const popupProfile = document.querySelector(selectors.popupProfile);

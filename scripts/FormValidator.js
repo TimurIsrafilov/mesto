@@ -38,17 +38,17 @@ export class FormValidator {
     } else {
       this._hideInputError(inputElement);
     }
-  };
+  }
 
   // проверка на невалидность поля
   _hasInvalidInput() {
     return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     });
-  };
+  }
 
   //деактивация кнопки сабмит
-  _deactivationButtonElement = () => {
+  _disableButton = () => {
     this._buttonElement.disabled = true;
     this._buttonElement.classList.add(this._inactiveButtonClass);
   };
@@ -56,12 +56,12 @@ export class FormValidator {
   //переключение состояния кнопки сабмит
   _toggleButtonState() {
     if (this._hasInvalidInput()) {
-      this._deactivationButtonElement();
+      this._disableButton();
     } else {
       this._buttonElement.removeAttribute("disabled");
       this._buttonElement.classList.remove(this._inactiveButtonClass);
     }
-  };
+  }
 
   // установка слушателей
   _setEventListeners() {
@@ -73,13 +73,13 @@ export class FormValidator {
         this._toggleButtonState();
       });
     });
-  };
+  }
 
   // включить валидацию
   enableValidation() {
     this._formElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      this._deactivationButtonElement();
+      this._disableButton();
     });
     this._setEventListeners();
   }

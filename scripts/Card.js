@@ -1,28 +1,22 @@
-import { selectors, cardPhoto, namePhoto } from "./constants.js";
+import { selectors } from "./constants.js";
 
 export class Card {
-  constructor(data, templateContent, openPopupPhoto, popupPhoto) {
+  constructor(data, templateContent, openPopupPhoto, handleImageClick) {
     this._link = data.link;
     this._name = data.name;
     this._templateContent = templateContent;
     this._openPopupPhoto = openPopupPhoto;
-    this._popupPhoto = popupPhoto;
+    this._handleImageClick = handleImageClick;
   }
 
   createCard() {
     this._cardElement = this._templateContent.cloneNode(true);
-    this._templatePhoto = this._cardElement.querySelector(
-      selectors.cardsContainerImage
-    );
-    this._templateTitle = this._cardElement.querySelector(
-      selectors.cardsContainerTitle
-    );
+    this._templatePhoto = this._cardElement.querySelector(selectors.cardImage);
+    this._templateTitle = this._cardElement.querySelector(selectors.cardTitle);
 
-    this._likeButton = this._cardElement.querySelector(
-      selectors.cardsContainerLike
-    );
+    this._likeButton = this._cardElement.querySelector(selectors.cardLike);
     this._trashButton = this._cardElement.querySelector(
-      selectors.cardsContainerTrashIcon
+      selectors.cardTrashIcon
     );
 
     this._templatePhoto.src = this._link;
@@ -37,7 +31,7 @@ export class Card {
 
   //активация-деактивация лайка
   _handleToggleLike = () => {
-    this._likeButton.classList.toggle(selectors.cardsContainerLikeActive);
+    this._likeButton.classList.toggle(selectors.cardLikeActive);
   };
 
   //удаление карточки
@@ -47,16 +41,13 @@ export class Card {
   };
 
   //попап увеличения картинки
-  _enlargePhoto = () => {
-    cardPhoto.src = this._templatePhoto.src;
-    cardPhoto.alt = this._templatePhoto.alt;
-    namePhoto.textContent = this._templateTitle.textContent;
-    this._openPopupPhoto(this._popupPhoto);
+  _handleCardClick = () => {
+    this._openPopupPhoto(this._handleImageClick);
   };
 
   _setEventListeners = () => {
     this._likeButton.addEventListener("click", this._handleToggleLike);
     this._trashButton.addEventListener("click", this._handleDeleteCard);
-    this._templatePhoto.addEventListener("click", this._enlargePhoto);
+    this._templatePhoto.addEventListener("click", this._handleCardClick);
   };
 }
