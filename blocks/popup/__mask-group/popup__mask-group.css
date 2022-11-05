@@ -17,3 +17,9 @@
     max-width: 496px;
   }
 }
+
+@media screen and (max-width: 320px) {
+  .popup__mask-group {
+    max-width: 240px;
+  }
+}

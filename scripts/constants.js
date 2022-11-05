@@ -7,7 +7,7 @@ export const selectors = {
   popupForm: ".popup__form",
   profileTitle: ".profile__title",
   profileSubtitle: ".profile__subtitle",
-  elements: ".elements",
+  cardsContainer: ".elements",
   cardTemplate: ".card-template",
   popupPhoto: ".popup_photo",
   popupMask_group: ".popup__mask-group",
@@ -16,14 +16,14 @@ export const selectors = {
   profileAddButton: ".profile__add-button",
   popupInputTypePlace: ".popup__input_type_place",
   popupInputTypeReference: ".popup__input_type_reference",
-  elementsElement: ".elements__element",
+  cardTemplateContent: ".elements__element",
   popupOpened: "popup_opened",
   popupOpenedSelector: ".popup_opened",
-  elementsMask_group: ".elements__mask-group",
-  elementsTitle: ".elements__title",
-  elementsGroup: ".elements__group",
-  elementsGroupActive: "elements__group_active",
-  elementsTrashIcon: ".elements__trash-icon",
+  cardsContainerImage: ".elements__mask-group",
+  cardsContainerTitle: ".elements__title",
+  cardsContainerLike: ".elements__group",
+  cardsContainerLikeActive: "elements__group_active",
+  cardsContainerTrashIcon: ".elements__trash-icon",
 }
 
 export const popupProfile = document.querySelector(selectors.popupProfile);
@@ -34,7 +34,7 @@ export const professionInput = popupProfile.querySelector(selectors.popupInputTy
 export const formProfile = popupProfile.querySelector(selectors.popupForm);
 export const profileName = document.querySelector(selectors.profileTitle);
 export const profileProfession = document.querySelector(selectors.profileSubtitle);
-export const cardList = document.querySelector(selectors.elements);
+export const cardContainer = document.querySelector(selectors.cardsContainer);
 export const cardTemplate = document.querySelector(selectors.cardTemplate);
 export const popupPhoto = document.querySelector(selectors.popupPhoto);
 export const cardPhoto = popupPhoto.querySelector(selectors.popupMask_group);
@@ -46,4 +46,4 @@ export const popupCardCloseButton = popupCard.querySelector(selectors.popupClose
 export const placeInput = popupCard.querySelector(selectors.popupInputTypePlace);
 export const referenceInput = popupCard.querySelector(selectors.popupInputTypeReference);
 export const formCard = popupCard.querySelector(selectors.popupForm);
-export const templateContent = cardTemplate.content.querySelector(selectors.elementsElement);
+export const templateContent = cardTemplate.content.querySelector(selectors.cardTemplateContent);

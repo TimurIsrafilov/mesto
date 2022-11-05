@@ -1,8 +1,7 @@
-import { FormValidator } from './FormValidator.js';
-import { Card } from './Card.js';
-import { initialCards } from './cards.js';
-
-initialCards
+import { FormValidator } from "./FormValidator.js";
+import { Card } from "./Card.js";
+import { openPopupPhoto } from "./utils.js";
+import { initialCards } from "./cards.js";
 
 import {
   selectors,
@@ -14,7 +13,7 @@ import {
   formProfile,
   profileName,
   profileProfession,
-  cardList,
+  cardContainer,
   popupPhoto,
   popupPhotoCloseButton,
   popupCard,
@@ -26,16 +25,16 @@ import {
   templateContent,
 } from "./constants.js";
 
-const config = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit-button',
-  inputErrorClass: 'popup__input_state_invalid',
-  inactiveButtonClass: 'popup__submit-button_state_invalid',
-}
+const validationConfig = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__submit-button",
+  inputErrorClass: "popup__input_state_invalid",
+  inactiveButtonClass: "popup__submit-button_state_invalid",
+};
 
-const formValidatorProfile = new FormValidator(config, formProfile);
-const formValidatorCard = new FormValidator(config, formCard);
+const formValidatorProfile = new FormValidator(validationConfig, formProfile);
+const formValidatorCard = new FormValidator(validationConfig, formCard);
 
 formValidatorProfile.enableValidation();
 formValidatorCard.enableValidation();
@@ -44,31 +43,31 @@ formValidatorCard.enableValidation();
 export { openPopup };
 function openPopup(popup) {
   popup.classList.add(selectors.popupOpened);
-  document.addEventListener('keydown', closePopupByEsc);
-  popup.addEventListener('click', closePopupByOverlay);
+  document.addEventListener("keydown", closePopupByEsc);
+  popup.addEventListener("click", closePopupByOverlay);
 }
 
 //общий попап на закрытие + удаления слушателей если попап закрыт
 function closePopup(popup) {
   popup.classList.remove(selectors.popupOpened);
-  document.removeEventListener('keydown', closePopupByEsc);
-  popup.removeEventListener('click', closePopupByOverlay);
+  document.removeEventListener("keydown", closePopupByEsc);
+  popup.removeEventListener("click", closePopupByOverlay);
 }
 
 //закрытия попапа при нажатии на оверлей
 function closePopupByOverlay(evt) {
   const popup = document.querySelector(selectors.popupOpenedSelector);
   if (evt.target !== evt.currentTarget) return;
-    closePopup(popup);
+  closePopup(evt.target);
 }
 
 //закрытия попапа при нажатии на escape
 function closePopupByEsc(evt) {
   const popup = document.querySelector(selectors.popupOpenedSelector);
-  if (evt.key !== 'Escape') {
-    return
+  if (evt.key !== "Escape") {
+    return;
   }
-    closePopup(popup);
+  closePopup(popup);
 }
 
 //попап на открытие профиля
@@ -99,25 +98,27 @@ function closePopupPhoto() {
 }
 
 //создание карт
-const renderCard = (data) => {
-  const card = new Card(data, templateContent);
+function generateCard(data) {
+  const card = new Card(data, templateContent, openPopupPhoto);
   const cardElement = card.createCard();
-  cardList.prepend(cardElement);
+  return cardElement;
 }
 
 //создание исходных карт
 initialCards.forEach((data) => {
-  renderCard(data);
+  const cardElement = generateCard(data);
+  cardContainer.append(cardElement);
 });
 
 //создание новой карты
 function handleSubmitCardForm(evt) {
   evt.preventDefault();
 
-  const card = renderCard({
+  const cardElement = generateCard({
     name: placeInput.value,
     link: referenceInput.value,
   });
+  cardContainer.prepend(cardElement);
 
   placeInput.value = "";
   referenceInput.value = "";
