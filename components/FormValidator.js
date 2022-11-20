@@ -48,7 +48,7 @@ export class FormValidator {
   }
 
   //деактивация кнопки сабмит
-  _disableButton = () => {
+  disableButton = () => {
     this._buttonElement.disabled = true;
     this._buttonElement.classList.add(this._inactiveButtonClass);
   };
@@ -56,7 +56,7 @@ export class FormValidator {
   //переключение состояния кнопки сабмит
   _toggleButtonState() {
     if (this._hasInvalidInput()) {
-      this._disableButton();
+      this.disableButton();
     } else {
       this._buttonElement.removeAttribute("disabled");
       this._buttonElement.classList.remove(this._inactiveButtonClass);
@@ -79,7 +79,7 @@ export class FormValidator {
   enableValidation() {
     this._formElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      this._disableButton();
+      this.disableButton();
     });
     this._setEventListeners();
   }

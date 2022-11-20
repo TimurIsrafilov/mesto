@@ -1,12 +1,11 @@
 import { selectors } from "./constants.js";
 
 export class Card {
-  constructor(data, templateContent, openPopupPhoto, handleImageClick) {
-    this._link = data.link;
+  constructor(data, { handleCardClick }, templateContent) {
     this._name = data.name;
+    this._link = data.link;
     this._templateContent = templateContent;
-    this._openPopupPhoto = openPopupPhoto;
-    this._handleImageClick = handleImageClick;
+    this._handleCardClick = handleCardClick;
   }
 
   createCard() {
@@ -41,13 +40,14 @@ export class Card {
   };
 
   //попап увеличения картинки
-  _handleCardClick = () => {
-    this._openPopupPhoto(this._handleImageClick);
+  _handleCardOpen = () => {
+    this._handleCardClick(this._name, this._link);
   };
 
+  //слушатели
   _setEventListeners = () => {
     this._likeButton.addEventListener("click", this._handleToggleLike);
     this._trashButton.addEventListener("click", this._handleDeleteCard);
-    this._templatePhoto.addEventListener("click", this._handleCardClick);
+    this._templatePhoto.addEventListener("click", this._handleCardOpen);
   };
 }
