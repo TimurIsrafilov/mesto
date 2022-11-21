@@ -5,6 +5,7 @@ import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { Popup } from "../components/Popup.js";
 import { UserInfo } from "../components/UserInfo.js";
+import './index.css';
 
 import {
   selectors,
@@ -19,7 +20,7 @@ import {
   templateContent,
   validationConfig,
   initialCards,
-} from "../components/constants.js";
+} from "../utils/constants.js";
 
 const cardList = new Section(
   {
