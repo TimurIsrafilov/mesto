@@ -87,8 +87,9 @@ popupWithFormCard.setEventListeners();
 
 //слушатели
 popupProfileOpenButton.addEventListener("click", () => {
-  nameInput.value = userInfo.getUserInfo().name;
-  professionInput.value = userInfo.getUserInfo().profession;
+  const { name, profession } = userInfo.getUserInfo();
+  nameInput.value = name;
+  professionInput.value = profession;
   profilePopup.open();
 });
 popupCardOpenButton.addEventListener("click", () => cardPopup.open());
