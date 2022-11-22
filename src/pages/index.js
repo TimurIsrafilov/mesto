@@ -5,38 +5,53 @@ import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { Popup } from "../components/Popup.js";
 import { UserInfo } from "../components/UserInfo.js";
+import { selectors, validationConfig, initialCards } from "../utils/constants.js";
 import './index.css';
 
-import {
-  selectors,
-  popupProfile,
-  popupProfileOpenButton,
-  formProfile,
-  cardContainer,
-  popupPhoto,
-  popupCard,
-  popupCardOpenButton,
-  formCard,
-  templateContent,
-  validationConfig,
-  initialCards,
-} from "../utils/constants.js";
+const popupProfile = document.querySelector(selectors.popupProfile);
+const popupProfileOpenButton = document.querySelector(selectors.profileEditButton);
+const nameInput = popupProfile.querySelector(selectors.popupInputTypeName);
+const professionInput = popupProfile.querySelector(selectors.popupInputTypeProfession);
+const formProfile = popupProfile.querySelector(selectors.popupForm);
+
+const cardContainer = document.querySelector(selectors.cardsContainer);
+const cardTemplate = document.querySelector(selectors.cardTemplate);
+const popupCard = document.querySelector(selectors.popupCard);
+const popupCardOpenButton = document.querySelector(selectors.profileAddButton);
+const formCard = popupCard.querySelector(selectors.popupForm);
+const templateContent = cardTemplate.content.querySelector(selectors.cardTemplateContent);
+
+const popupPhoto = document.querySelector(selectors.popupPhoto);
+export const cardPhoto = popupPhoto.querySelector(selectors.popupMask_group);
+export const namePhoto = popupPhoto.querySelector(selectors.popupPhotoTitle);
+
+function addCard(cardData) {
+  const card = new Card(
+    cardData,
+    {
+      handleCardClick(name, link) {
+        popupWithImage.open(name, link);
+      },
+    },
+    templateContent
+  );
+  cardList.setItem(card.createCard());
+}
 
 const cardList = new Section(
   {
     data: initialCards,
-    renderer: (cardData) => {
-      const card = new Card(
-        cardData,
-        {
-          handleCardClick(name, link) {
-            popupWithImage.open(name, link);
-          },
-        },
-        templateContent
-      );
-      const cardElement = card.createCard();
-      cardList.setItem(cardElement);
+    renderer: addCard,
+  },
+  cardContainer
+);
+
+const popupWithFormCard = new PopupWithForm(
+  popupCard,
+  formCard,
+  {
+    handleFormSubmit: (data) => {
+      addCard({ name: data.place, link: data.reference });
     },
   },
   cardContainer
@@ -60,24 +75,6 @@ const popupWithFormProfile = new PopupWithForm(popupProfile, formProfile, {
   },
 });
 
-const popupWithFormCard = new PopupWithForm(popupCard, formCard, {
-    handleFormSubmit: (data) => {
-      const newCard = new Card(
-        { name: data.place, link: data.reference },
-        {
-          handleCardClick(name, link) {
-            popupWithImage.open(name, link);
-          },
-        },
-        templateContent
-      );
-      cardList.setItem(newCard.createCard());
-      popupWithFormCard.close();
-    },
-  },
-  cardContainer
-);
-
 //обработчики
 cardList.renderItems();
 
@@ -90,7 +87,8 @@ popupWithFormCard.setEventListeners();
 
 //слушатели
 popupProfileOpenButton.addEventListener("click", () => {
-  userInfo.getUserInfo();
+  nameInput.value = userInfo.getUserInfo().name;
+  professionInput.value = userInfo.getUserInfo().profession;
   profilePopup.open();
 });
 popupCardOpenButton.addEventListener("click", () => cardPopup.open());

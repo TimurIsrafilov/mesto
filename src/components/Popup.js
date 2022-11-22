@@ -3,16 +3,17 @@ import { selectors } from "../utils/constants.js";
 export class Popup {
   constructor(selector) {
     this._popupSelector = selector;
+    this._handleEscClose = this._handleEscClose.bind(this);
   }
 
   open() {
     this._popupSelector.classList.add(selectors.popupOpened);
-    document.addEventListener("keydown", (evt) => this._handleEscClose(evt));
+    document.addEventListener("keydown", this._handleEscClose);
   }
 
   close() {
     this._popupSelector.classList.remove(selectors.popupOpened);
-    document.removeEventListener("keydown", (evt) => this._handleEscClose(evt));
+    document.removeEventListener("keydown",this._handleEscClose);
   }
 
   _handleEscClose(evt) {
