@@ -1029,7 +1029,6 @@ template {
 .elements__like-container {
   display: flex;
   flex-direction: column;
-  flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
   margin: 0;
