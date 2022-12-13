@@ -14,13 +14,14 @@
   <main class="content">
     <section class="profile">
       <div class="profile__profile-container">
-        <img src="<%=require('./images/avatar.jpg')%>" alt="Аватарка" class="profile__avatar">
+        <img src="#" alt="Аватарка" class="profile__avatar">
+        <img class="profile__avatar-button">
         <div class="profile__profile-info">
           <div class="profile__profile-info-container">
-            <h1 class="profile__title">Жак-Ив Кусто</h1>
+            <h1 class="profile__title"></h1>
             <button type="button" class="profile__edit-button" aria-label="редактировать профиль"></button>
           </div>
-          <p class="profile__subtitle">Исследователь океана</p>
+          <p class="profile__subtitle"></p>
         </div>
       </div>
       <button type="button" class="profile__add-button" aria-label="добавить элемент"></button>
@@ -69,16 +70,41 @@
       <button type="button" class="popup__close-icon" aria-label="закрыть форму"></button>
     </div>
   </div>
+  <div class="popup popup_confirmation">
+    <div class="popup__container">
+      <form class="popup__form" name="deleteCardConfirmation">
+        <h3 class="popup__title">Вы уверены?</h3>
+        <button type="submit" class="popup__submit-button" aria-label="согласен">Да</button>
+        <button type="button" class="popup__close-icon" aria-label="закрыть форму"></button>
+      </form>
+    </div>
+  </div>
+  <div class="popup popup_avatar">
+    <div class="popup__container">
+      <form class="popup__form" name="avatarEditForm" novalidate>
+        <h3 class="popup__title">Обновить аватар</h3>
+        <input id="reference-input" type="url" placeholder="Ссылка на новый аватар" name="avatar" required
+          class="popup__input popup__input_type_reference">
+        <span class="popup__input-error reference-input-error"></span>
+        <button type="submit" class="popup__submit-button" aria-label="сохранить аватар">Сохранить</button>
+      </form>
+      <button type="button" class="popup__close-icon" aria-label="закрыть форму"></button>
+    </div>
+  </div>
   <template class="card-template">
     <div class="elements__element">
       <div class="elements__trash-icon"></div>
       <img src="src" alt="alt" class="elements__mask-group">
       <div class="elements__container">
         <h2 class="elements__title"></h2>
-        <button type="button" class="elements__group" aria-label="поставить нравиться"></button>
+        <div class="elements__like-container">
+          <button type="button" class="elements__group" aria-label="поставить нравиться"></button>
+          <span class="elements__likes-number"></span>
+        </div>
       </div>
     </div>
   </template>
+
 </body>
 
 </html>

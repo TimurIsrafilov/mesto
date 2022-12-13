@@ -2,10 +2,20 @@ import { Popup } from "./Popup.js";
 import { selectors } from "../utils/constants.js";
 
 export class PopupWithForm extends Popup {
-  constructor(popupSelector, form, { handleFormSubmit }) {
+  constructor(popupSelector, form, handleFormSubmit) {
     super(popupSelector);
     this._form = form;
     this._handleFormSubmit = handleFormSubmit;
+    this._submitButton = this._form.querySelector(selectors.submitButton);
+    this._loadingText = this._submitButton.textContent;
+  }
+
+  renderLoading(isLoading) {
+    if (isLoading) {
+      this._submitButton.textContent = "Сохранение...";
+    } else {
+      this._submitButton.textContent = this._loadingText;
+    }
   }
 
   _getInputValues() {
@@ -30,5 +40,5 @@ export class PopupWithForm extends Popup {
   close() {
     super.close();
     this._form.reset();
-  };
+  }
 }

@@ -4,7 +4,7 @@
   background: rgba(0, 0, 0, 1);
   border: none;
   border-radius: 2px;
-  margin: 34px 36px 0 36px;
+  margin: 34px 36px 36px 36px;
   padding: 0;
   cursor: pointer;
   opacity: 1;
@@ -27,7 +27,7 @@
   .popup__submit-button {
     width: 238px;
     height: 46px;
-    margin: 32px 22px 0 22px;
+    margin: 32px 22px 25px 22px;
     font-size: 14px;
     line-height: 17px;
   }
