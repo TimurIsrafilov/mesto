@@ -1,8 +1,8 @@
 import { selectors } from "../utils/constants.js";
 
 export class Popup {
-  constructor(selector) {
-    this._popupSelector = selector;
+  constructor(popupSelector) {
+    this._popupSelector = popupSelector;
     this._handleEscClose = this._handleEscClose.bind(this);
   }
 
@@ -13,7 +13,7 @@ export class Popup {
 
   close() {
     this._popupSelector.classList.remove(selectors.popupOpened);
-    document.removeEventListener("keydown",this._handleEscClose);
+    document.removeEventListener("keydown", this._handleEscClose);
   }
 
   _handleEscClose(evt) {
@@ -24,10 +24,10 @@ export class Popup {
 
   setEventListeners() {
     this._popupSelector.addEventListener("mousedown", (evt) => {
-      if (evt.target.classList.contains(selectors.popupOpened)) {
-        this.close();
-      }
-      if (evt.target.classList.contains(selectors.popupCloseIcon)) {
+      if (
+        evt.target.classList.contains(selectors.popupOpened) ||
+        evt.target.classList.contains(selectors.popupCloseIcon)
+      ) {
         this.close();
       }
     });

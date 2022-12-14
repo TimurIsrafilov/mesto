@@ -22,7 +22,7 @@ export class Card {
   }
 
   isLiked() {
-    const userLike = this._likes.find((user) => user._id === this._userId);
+    const userLike = this._likes.some((user) => user._id === this._userId);
 
     return userLike;
   }

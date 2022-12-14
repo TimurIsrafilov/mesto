@@ -20,3 +20,9 @@
   z-index: 1;
   background-color: rgba(0, 0, 0, 0.5);
 }
+
+@media screen and (max-width: 788px) {
+  .profile__avatar-button {
+    margin: 0;
+  }
+}
