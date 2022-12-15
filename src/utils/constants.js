@@ -32,6 +32,7 @@ export const selectors = {
   profileAvatar: ".profile__avatar",
   profileAvatarButton: ".profile__avatar-button",
   popupInputTypeAvatar: ".popup__input_type_name",
+  // popup: ".popup"
 };
 
 export const validationConfig = {

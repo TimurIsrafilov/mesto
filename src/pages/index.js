@@ -5,7 +5,7 @@ import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { UserInfo } from "../components/UserInfo.js";
 import { selectors, validationConfig } from "../utils/constants.js";
-import './index.css';
+// import './index.css';
 
 import { Api } from "../components/Api.js";
 import { PopupWithConfirmation } from "../components/PopupWithConfirmation.js";
@@ -56,27 +56,7 @@ const api = new Api({
   },
 });
 
-Promise.all([api.getProfileInfo(), api.getInitialCards()])
-  .then(([res, serverCards]) => {
-    userInfo.setUserInfo(res.name, res.about);
-    userInfo.setUserAvatar(res.avatar);
-    userId = res._id;
-
-    serverCards.forEach((res) => {
-      const card = addCard({
-        name: res.name,
-        link: res.link,
-        likes: res.likes,
-        id: res._id,
-        userId: userId,
-        ownerId: res.owner._id,
-      });
-      cardList.setItem(card);
-    });
-  })
-  .catch((err) => console.log(`Ошибка.....: ${err}`));
-
-function addCard(cardData) {
+function createCard(cardData) {
   const card = new Card(
     cardData,
     (name, link) => {
@@ -113,22 +93,34 @@ function addCard(cardData) {
   return card.createCard();
 }
 
+Promise.all([api.getProfileInfo(), api.getInitialCards()])
+  .then(([res, serverCards]) => {
+    userInfo.setUserInfo(res.name, res.about);
+    userInfo.setUserAvatar(res.avatar);
+    userId = res._id;
+    cardList.renderItems(serverCards);
+  })
+  .catch((err) => console.log(`Ошибка.....: ${err}`));
+
 const cardList = new Section(
   {
     data: [],
-    renderer: addCard,
+    renderer: (cardData) => {
+      cardList.setItem(cardData);
+    },
   },
   cardContainer
 );
 
 const popupWithFormCard = new PopupWithForm(
-  popupCard,
+  // popupCard,
+  selectors.popupCard,
   (data) => {
     popupWithFormCard.renderLoading(true);
     api.addNewCard(data.place, data.reference)
       .then((res) => {
         cardList.setItem(
-          addCard({
+          createCard({
             name: res.name,
             link: res.link,
             likes: res.likes,
@@ -146,7 +138,10 @@ const popupWithFormCard = new PopupWithForm(
   cardContainer
 );
 
-const popupWithFormAvatar = new PopupWithForm(popupAvatar, (data) => {
+const popupWithFormAvatar = new PopupWithForm(
+  // popupAvatar,
+  selectors.popupAvatar,
+  (data) => {
   popupWithFormAvatar.renderLoading(true);
   api.updateAvatar(data.avatar)
     .then((res) => {
@@ -168,9 +163,12 @@ const formValidatorProfile = new FormValidator(validationConfig, formProfile);
 const formValidatorCard = new FormValidator(validationConfig, formCard);
 const formValidatorAvatar = new FormValidator(validationConfig, formAvatar);
 
-const popupWithImage = new PopupWithImage(popupPhoto);
+const popupWithImage = new PopupWithImage(selectors.popupPhoto);
 
-const popupWithFormProfile = new PopupWithForm(popupProfile, (data) => {
+const popupWithFormProfile = new PopupWithForm(
+  // popupProfile,
+  selectors.popupProfile,
+   (data) => {
   popupWithFormProfile.renderLoading(true);
   api.editProfileInfo(data.name, data.profession)
     .then((res) => {
@@ -182,7 +180,7 @@ const popupWithFormProfile = new PopupWithForm(popupProfile, (data) => {
     });
 });
 
-const popupWithFormConfirm = new PopupWithConfirmation(popupConfirmation);
+const popupWithFormConfirm = new PopupWithConfirmation(selectors.popupConfirmation);
 
 //обработчики
 cardList.renderItems();

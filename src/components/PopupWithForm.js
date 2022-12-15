@@ -4,7 +4,7 @@ import { selectors } from "../utils/constants.js";
 export class PopupWithForm extends Popup {
   constructor(popupSelector, handleFormSubmit) {
   super(popupSelector);
-  this._form = popupSelector.querySelector(selectors.popupForm);
+  this._form = this._popupSelector.querySelector(selectors.popupForm);
   this._handleFormSubmit = handleFormSubmit;
   this._submitButton = this._form.querySelector(selectors.submitButton);
   this._loadingText = this._submitButton.textContent;
